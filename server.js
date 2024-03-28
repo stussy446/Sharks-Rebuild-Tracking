@@ -18,7 +18,7 @@ app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
 
-app.use('/players', playerRouter);
+app.use('/api/v1/players', playerRouter);
 
 app.post('/', (req, res) => {
   res.json({
