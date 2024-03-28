@@ -2,6 +2,8 @@ import express from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
+import playerRouter from './routes/playerRoutes.js';
+
 dotenv.config();
 const { PORT, NODE_ENV } = process.env;
 
@@ -16,11 +18,7 @@ app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
 
-app.get('/', (req, res) => {
-  res.json({
-    test: 'hello!',
-  });
-});
+app.use('/players', playerRouter);
 
 app.post('/', (req, res) => {
   res.json({
