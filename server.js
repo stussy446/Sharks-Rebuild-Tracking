@@ -1,28 +1,18 @@
-import express from 'express';
-import morgan from 'morgan';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
-import playerRouter from './routes/playerRoutes.js';
+import app from './app.js';
 
 dotenv.config();
 const { PORT, NODE_ENV } = process.env;
+let { DATABASE } = process.env;
 
-const app = express();
-app.use(express.json());
+DATABASE = DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 
-if (NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
+mongoose.connect(DATABASE).then(() => {
+  console.log('DB Connection successful');
+});
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
-});
-
-app.use('/api/v1/players', playerRouter);
-
-app.post('/', (req, res) => {
-  res.json({
-    message: 'data received',
-    data: req.body,
-  });
 });
