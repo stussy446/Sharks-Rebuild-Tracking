@@ -1,23 +1,10 @@
-import { nanoid } from 'nanoid';
-
-let players = [
-  {
-    id: nanoid(),
-    name: 'Steve Rector',
-    team: 'San Jose Sharks',
-    position: 'Left Wing',
-  },
-  {
-    id: 2,
-    name: 'Dildo Baggins',
-    team: 'San Jose Barracude',
-    position: 'Center',
-  },
-];
+import Player from '../models/Player.js';
 
 // GET ALL PLAYERS
 export const getAllPlayers = async (req, res) => {
   try {
+    const players = await Player.find();
+
     res.status(201).json({
       status: 'success',
       players: players,
@@ -53,6 +40,7 @@ export const getPlayer = async (req, res) => {
     const id = Number(req.params.id);
     const foundPlayer = players.find((player) => player.id === id);
     if (!foundPlayer) throw new Error('player not found');
+
     res.status(201).json({
       status: 'success',
       foundPlayer,
@@ -65,6 +53,7 @@ export const getPlayer = async (req, res) => {
   }
 };
 
+// UPDATE PLAYER
 export const updatePlayer = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -90,6 +79,7 @@ export const updatePlayer = async (req, res) => {
   }
 };
 
+// DELETE PLAYER
 export const deletePlayer = async (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -102,7 +92,6 @@ export const deletePlayer = async (req, res) => {
 
     res.status(201).json({
       status: 'success',
-      foundPlayer,
       players,
     });
   } catch (error) {
