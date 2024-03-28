@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import slugify from 'slugify';
 
+// Creates schema for Player model
 const playerSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -32,6 +33,7 @@ const playerSchema = new mongoose.Schema({
   },
 });
 
+// middleware to create slug for each collection before being added to db
 playerSchema.pre('save', function (next) {
   this.slug = slugify(this.lastName, { lower: true });
   next();
