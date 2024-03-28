@@ -1,0 +1,29 @@
+[
+  {
+    "firstName": "Steve",
+    "lastName": "Rector",
+    "team": "San Jose Sharks",
+    "position": "Center"
+  },
+
+  {
+    "firstName": "Joe",
+    "lastName": "Thornton",
+    "team": "San Jose Sharks",
+    "position": "Center"
+  },
+
+  {
+    "firstName": "Patrick",
+    "lastName": "Marleau",
+    "team": "San Jose Sharks",
+    "position": "Right Wing"
+  },
+
+  {
+    "firstName": "Thomas",
+    "lastName": "Bordelau",
+    "team": "San Jose Barracude",
+    "position": "Left Wing"
+  }
+]
