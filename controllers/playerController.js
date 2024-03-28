@@ -1,96 +1,82 @@
 import Player from '../models/Player.js';
 
+// **************
+// NOTE, I am utilizing the express-async-errors package (imported in server.js) which essentially handles try catch behind the scenes,
+// so that is why we aren't seeing try/catch in this file
+// **************
+
 // GET ALL PLAYERS
 export const getAllPlayers = async (req, res) => {
-  try {
-    const players = await Player.find();
+  const players = await Player.find();
 
-    res.status(201).json({
-      status: 'success',
-      players: players,
-    });
-  } catch (error) {
-    res.status(404).json({
-      status: 'failed',
-      message: error.message,
-    });
-  }
+  res.status(201).json({
+    status: 'success',
+    players: players,
+  });
 };
 
 // CREATE PLAYER
 export const createPlayer = async (req, res) => {
-  try {
-    const newPlayer = await { ...req.body };
-    await Player.create(newPlayer);
+  const newPlayer = await Player.create(req.body);
 
-    res.status(201).json({
-      status: 'success',
-      newPlayer: newPlayer,
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'failed',
-      message: error.message,
-    });
-  }
+  res.status(201).json({
+    status: 'success',
+    newPlayer: newPlayer,
+  });
 };
 
 // GET A PLAYER
 export const getPlayer = async (req, res) => {
-  try {
-    const foundPlayer = await Player.findById(req.params.id);
-    if (!foundPlayer) throw new Error('player not found');
+  const id = req.params.id;
+  const foundPlayer = await Player.findById(id);
 
-    res.status(201).json({
-      status: 'success',
-      foundPlayer,
-    });
-  } catch (error) {
-    res.status(404).json({
+  if (!foundPlayer)
+    return res.status(404).json({
       status: 'failed',
-      message: error.message,
+      message: `no player with id: ${id}`,
     });
-  }
+
+  res.status(201).json({
+    status: 'success',
+    foundPlayer,
+  });
 };
 
 // UPDATE PLAYER
 export const updatePlayer = async (req, res) => {
-  try {
-    const player = await Player.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!player) throw new Error('player not found');
+  const id = req.params.id;
+  const player = await Player.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
-    res.status(201).json({
-      status: 'success',
-      player: player,
-    });
-  } catch (error) {
-    res.status(404).json({
+  if (!player)
+    return res.status(404).json({
       status: 'failed',
-      message: error.message,
+      message: `no player with id: ${id}`,
     });
-  }
+
+  res.status(201).json({
+    status: 'success',
+    player: player,
+  });
 };
 
 // DELETE PLAYER
 export const deletePlayer = async (req, res) => {
-  try {
-    const player = await Player.findByIdAndDelete(req.params.id, {
-      runValidators: true,
-    });
+  const id = req.params.id;
+  const player = await Player.findByIdAndDelete(id, {
+    runValidators: true,
+  });
 
-    if (!player) throw new Error('player not found');
-
-    res.status(200).json({
-      status: 'successful deletion',
-      player,
-    });
-  } catch (error) {
-    res.status(404).json({
+  if (!player)
+    return res.status(404).json({
       status: 'failed',
-      message: error.message,
+      message: `no player with id: ${id}`,
     });
-  }
+
+  res.status(200).json({
+    status: 'successful deletion',
+    player,
+  });
 };
