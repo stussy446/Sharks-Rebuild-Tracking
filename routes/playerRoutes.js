@@ -1,4 +1,4 @@
-import express from 'express';
+import { Router } from 'express';
 import {
   getAllPlayers,
   createPlayer,
@@ -7,7 +7,7 @@ import {
   deletePlayer,
 } from '../controllers/playerController.js';
 
-const router = express.Router();
+const router = Router();
 
 router.route('/').get(getAllPlayers).post(createPlayer);
 router.route('/:id').get(getPlayer).patch(updatePlayer).delete(deletePlayer);
