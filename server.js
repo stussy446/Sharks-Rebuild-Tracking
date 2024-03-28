@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import app from './app.js';
 
 dotenv.config();
-const { PORT, NODE_ENV } = process.env;
+const { PORT } = process.env;
 let { DATABASE } = process.env;
 
 DATABASE = DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
