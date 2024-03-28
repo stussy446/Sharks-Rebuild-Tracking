@@ -27,8 +27,14 @@ export const createPlayer = async (req, res) => {
 
 // GET A PLAYER
 export const getPlayer = async (req, res) => {
-  const foundPlayer = await Player.findById(req.params.id);
-  if (!foundPlayer) throw new Error('player not found');
+  const id = req.params.id;
+  const foundPlayer = await Player.findById(id);
+
+  if (!foundPlayer)
+    return res.status(404).json({
+      status: 'failed',
+      message: `no player with id: ${id}`,
+    });
 
   res.status(201).json({
     status: 'success',
@@ -38,11 +44,17 @@ export const getPlayer = async (req, res) => {
 
 // UPDATE PLAYER
 export const updatePlayer = async (req, res) => {
-  const player = await Player.findByIdAndUpdate(req.params.id, req.body, {
+  const id = req.params.id;
+  const player = await Player.findByIdAndUpdate(id, req.body, {
     new: true,
     runValidators: true,
   });
-  if (!player) throw new Error('player not found');
+
+  if (!player)
+    return res.status(404).json({
+      status: 'failed',
+      message: `no player with id: ${id}`,
+    });
 
   res.status(201).json({
     status: 'success',
@@ -52,11 +64,16 @@ export const updatePlayer = async (req, res) => {
 
 // DELETE PLAYER
 export const deletePlayer = async (req, res) => {
-  const player = await Player.findByIdAndDelete(req.params.id, {
+  const id = req.params.id;
+  const player = await Player.findByIdAndDelete(id, {
     runValidators: true,
   });
 
-  if (!player) throw new Error('player not found');
+  if (!player)
+    return res.status(404).json({
+      status: 'failed',
+      message: `no player with id: ${id}`,
+    });
 
   res.status(200).json({
     status: 'successful deletion',
