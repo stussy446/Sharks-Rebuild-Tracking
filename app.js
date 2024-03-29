@@ -6,6 +6,8 @@ dotenv.config();
 
 import playerRouter from './routes/playerRoutes.js';
 
+import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
+
 // express initialization and Middleware
 const app = express();
 app.use(express.json());
@@ -25,12 +27,6 @@ app.use('*', (req, res) => {
 });
 
 // Error route handler
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({
-    message: 'something went wrong',
-  });
-  next();
-});
+app.use(errorHandlerMiddleware);
 
 export default app;

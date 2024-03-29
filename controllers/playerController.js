@@ -1,4 +1,6 @@
 import Player from '../models/Player.js';
+import { StatusCodes } from 'http-status-codes';
+import { NotFoundError } from '../errors/customError.js';
 
 // **************
 // NOTE, I am utilizing the express-async-errors package (imported in server.js) which essentially handles try catch behind the scenes,
@@ -9,7 +11,7 @@ import Player from '../models/Player.js';
 export const getAllPlayers = async (req, res) => {
   const players = await Player.find();
 
-  res.status(201).json({
+  res.status(StatusCodes.OK).json({
     status: 'success',
     players: players,
   });
@@ -19,7 +21,7 @@ export const getAllPlayers = async (req, res) => {
 export const createPlayer = async (req, res) => {
   const newPlayer = await Player.create(req.body);
 
-  res.status(201).json({
+  res.status(StatusCodes.CREATED).json({
     status: 'success',
     newPlayer: newPlayer,
   });
@@ -27,16 +29,12 @@ export const createPlayer = async (req, res) => {
 
 // GET A PLAYER
 export const getPlayer = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const foundPlayer = await Player.findById(id);
 
-  if (!foundPlayer)
-    return res.status(404).json({
-      status: 'failed',
-      message: `no player with id: ${id}`,
-    });
+  if (!foundPlayer) throw new NotFoundError(`no player with id: ${id}`);
 
-  res.status(201).json({
+  res.status(StatusCodes.OK).json({
     status: 'success',
     foundPlayer,
   });
@@ -56,7 +54,7 @@ export const updatePlayer = async (req, res) => {
       message: `no player with id: ${id}`,
     });
 
-  res.status(201).json({
+  res.status(StatusCodes.OK).json({
     status: 'success',
     player: player,
   });
@@ -75,7 +73,7 @@ export const deletePlayer = async (req, res) => {
       message: `no player with id: ${id}`,
     });
 
-  res.status(200).json({
+  res.status(StatusCodes.OK).json({
     status: 'successful deletion',
     player,
   });
