@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import slugify from 'slugify';
+import { PLAYER_STATUS } from '../utils/constants.js';
 
 // Creates schema for Player model
 const playerSchema = new mongoose.Schema(
