@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import slugify from 'slugify';
-import { PLAYER_STATUS } from '../utils/constants.js';
+import { PLAYER_POSITION } from '../utils/constants.js';
 
 // Creates schema for Player model
 const playerSchema = new mongoose.Schema(
@@ -31,6 +31,7 @@ const playerSchema = new mongoose.Schema(
 
     position: {
       type: String,
+      enum: Object.values(PLAYER_POSITION),
       required: [true, 'A player must have a position'],
     },
   },

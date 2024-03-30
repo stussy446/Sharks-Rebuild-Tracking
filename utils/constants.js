@@ -1,5 +1,8 @@
-export const PLAYER_STATUS = {
-  PENDING: 'pending',
-  TRYOUT: 'tryout',
-  DECLINED: 'declined',
+export const PLAYER_POSITION = {
+  CENTER: 'center',
+  LEFT_WING: 'left wing',
+  RIGHT_WING: 'right wing',
+  LEFT_DEFENSE: 'left defense',
+  RIGHT_DEFENSE: 'right defense',
+  GOALIE: 'goalie',
 };
