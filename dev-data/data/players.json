@@ -1,29 +1,43 @@
 [
   {
-    "firstName": "Steve",
-    "lastName": "Rector",
-    "team": "San Jose Sharks",
-    "position": "Center"
-  },
-
-  {
     "firstName": "Joe",
     "lastName": "Thornton",
     "team": "San Jose Sharks",
-    "position": "Center"
+    "position": "center"
   },
 
   {
     "firstName": "Patrick",
     "lastName": "Marleau",
     "team": "San Jose Sharks",
-    "position": "Right Wing"
+    "position": "right wing"
   },
 
   {
     "firstName": "Thomas",
     "lastName": "Bordelau",
     "team": "San Jose Barracude",
-    "position": "Left Wing"
+    "position": "left wing"
+  },
+
+  {
+    "firstName": "Mario",
+    "lastName": "Ferraro",
+    "team": "San Jose Sharks",
+    "position": "right defense"
+  },
+
+  {
+    "firstName": "Henry",
+    "lastName": "Thrun",
+    "team": "San Jose Sharks",
+    "position": "left defense"
+  },
+
+  {
+    "firstName": "Mackenzie",
+    "lastName": "Blackwood",
+    "team": "San Jose Sharks",
+    "position": "goalie"
   }
 ]

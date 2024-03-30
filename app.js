@@ -7,7 +7,6 @@ dotenv.config();
 import playerRouter from './routes/playerRoutes.js';
 
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
-import { validateTest } from './middleware/validationMiddleware.js';
 
 // express initialization and Middleware
 const app = express();
@@ -16,12 +15,6 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-
-app.post('/api/v1/test', validateTest, (req, res) => {
-  const { name } = req.body;
-  res.json({ message: `hello ${name}` });
-});
-
 // ROUTES
 app.use('/api/v1/players', playerRouter);
 
