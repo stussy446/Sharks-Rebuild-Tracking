@@ -12,12 +12,15 @@ import { StatusCodes } from 'http-status-codes';
 
 // Register
 export const register = async (req, res) => {
+  const user = await User.create(req.body);
+
   res.status(StatusCodes.OK).json({
     status: 'success',
-    message: 'This is the register placeholder',
+    user,
   });
 };
 
+//login
 export const login = async (req, res) => {
   res.status(StatusCodes.OK).json({
     status: 'success',
