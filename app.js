@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import playerRouter from './routes/playerRoutes.js';
+import authRouter from './routes/authRoutes.js';
 
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 // ROUTES
 app.use('/api/v1/players', playerRouter);
+app.use('/api/v1/auth', authRouter);
 
 // Nonexistent route handler
 app.use('*', (req, res) => {

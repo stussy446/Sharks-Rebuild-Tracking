@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
   },
 });
 
-playerSchema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
   this.slug = slugify(this.lastName, { lower: true });
   next();
 });
