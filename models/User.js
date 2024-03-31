@@ -30,6 +30,9 @@ const userSchema = mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
+  slug: {
+    type: String,
+  },
 });
 
 userSchema.pre('save', function (next) {
