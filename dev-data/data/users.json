@@ -3,7 +3,8 @@
     "firstName": "john",
     "email": "john@gmail.com",
     "password": "secret123",
-    "lastName": "smith"
+    "lastName": "smith",
+    "role": "admin"
   },
 
   {
