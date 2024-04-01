@@ -1,8 +1,9 @@
 import { body, param, validationResult } from 'express-validator';
 import { BadRequestError, NotFoundError } from '../errors/customError.js';
-import { PLAYER_POSITION } from '../utils/constants.js';
+import { PLAYER_POSITION, USER_ROLE } from '../utils/constants.js';
 import mongoose from 'mongoose';
 import Player from '../models/Player.js';
+import User from '../models/User.js';
 
 // function used in all oether validations in this file to make sure correct status code and message is thrown
 const withValidationErrors = (validateValues) => {
@@ -51,4 +52,35 @@ export const validateIdParam = withValidationErrors([
 
     if (!foundPlayer) throw new NotFoundError(`no player with id: ${value}`);
   }),
+]);
+
+// validates registration input
+export const validateRegisterinput = withValidationErrors([
+  body('firstName')
+    .notEmpty()
+    .withMessage('user must have first name')
+    .isLength({ min: 2, max: 25 })
+    .withMessage('first name must be between 2 and 25 characters')
+    .trim(),
+  body('lastName')
+    .notEmpty()
+    .withMessage('user must have last name')
+    .isLength({ min: 2, max: 25 })
+    .withMessage('last name must be between 2 and 25 characters')
+    .trim(),
+  body('email')
+    .notEmpty()
+    .withMessage('user must have an email')
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('invalid email format')
+    .custom(async (email) => {
+      const user = await User.findOne({ email });
+      if (user) throw new BadRequestError('email already exissts');
+    }),
+  body('password')
+    .notEmpty()
+    .withMessage('user must have a password')
+    .isLength({ min: 8 })
+    .withMessage('password must be at least 8 characters'),
 ]);

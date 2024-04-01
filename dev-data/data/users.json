@@ -1,0 +1,33 @@
+[
+  {
+    "firstName": "john",
+    "email": "john@gmail.com",
+    "password": "secret123",
+    "lastName": "smith",
+    "role": "admin"
+  },
+
+  {
+    "firstName": "steve",
+    "email": "steverector27@gmail.com",
+    "password": "secret123",
+    "lastName": "rector",
+    "location": "danville"
+  },
+
+  {
+    "firstName": "kevin",
+    "email": "kre756@comcast.net",
+    "password": "secret123",
+    "lastName": "rector",
+    "location": "san ramon"
+  },
+
+  {
+    "firstName": "chris",
+    "email": "chrish@comcast.net",
+    "password": "secret123",
+    "lastName": "hardmen",
+    "location": "dublin"
+  }
+]

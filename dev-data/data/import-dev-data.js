@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import fs from 'fs';
 import Player from '../../models/Player.js';
+import User from '../../models/User.js';
 
 dotenv.config();
 const __dirname = import.meta.dirname;
@@ -13,15 +14,18 @@ mongoose.connect(DATABASE).then(() => {
   console.log('DB Connection successful');
 });
 
-// READ JSON FILE
+// READ JSON FILES
 const players = JSON.parse(
   fs.readFileSync(`${__dirname}/players.json`, 'utf-8')
 );
+
+const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
 
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
     await Player.create(players);
+    await User.create(users);
     console.log(`data successfully loaded`);
     process.exit();
   } catch (err) {
@@ -33,6 +37,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Player.deleteMany();
+    await User.deleteMany();
     console.log(`deletion successful!`);
     process.exit();
   } catch (err) {
